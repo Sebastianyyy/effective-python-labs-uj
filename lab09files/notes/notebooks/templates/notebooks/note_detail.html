@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title3 %}Note Title: {{ note.title }}{% endblock %}
+{% block content %}
+<h4>Created by: {{ note.created_by }}</h4>
+<h3>Topic: {{note.topic}}</h3>
+<p>{{ note.body }}</p>
+
+{% endblock %}
+
+{% block title %}Note{% endblock %}
+{% block title2 %}Note{% endblock %}
+{% block leftmenu %}
+    <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url "notebooks:note-update" note.pk %}">Update</a></li>
+    <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url "notebooks:note-delete" note.pk %}">Delete</a></li>
+    <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url "notebooks:note-list" %}">Back to list</a></li>
+
+{% endblock %}
+
+{% block uppermenu %}
+<li class="nav-item"><a class="nav-link" href="{% url 'notebooks:note-list' %}">Go To Notes</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'notebooks:topic-list' %}">Go To Topics</a></li>
+
+     {% if user.is_authenticated %}
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Welcome, {{user.username}}</a>
+      </li>
+
+      {% else %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+      </li>
+
+      {% endif %}
+{% endblock %}
+

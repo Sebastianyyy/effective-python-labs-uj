@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title3 %}Add new Topic{% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
+{% endblock %}
+
+{% block title %}Topic{% endblock %}
+{% block title2 %}Topic{% endblock %}
+{% block leftmenu %}
+   
+{% endblock %}
+{% block uppermenu %}
+<li class="nav-item"><a class="nav-link" href="{% url 'notebooks:note-list' %}">Go To Notes</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'notebooks:topic-list' %}">Go To Topics</a></li>
+
+     {% if user.is_authenticated %}
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Welcome, {{user.username}}</a>
+      </li>
+
+      {% else %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+      </li>
+
+      {% endif %}
+{% endblock %}
